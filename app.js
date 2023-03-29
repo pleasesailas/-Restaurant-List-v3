@@ -1,8 +1,7 @@
 const express = require('express')
-const app = express()
-const port = 3000
 const exphdbs = require('express-handlebars')
-const restaurant = require('./restaurant.json')
+const Restaurant = require('./models/restaurant')
+const bodyParser = require('body-parser')
 // mongoose
 const mongoose = require('mongoose')
 
@@ -19,21 +18,34 @@ db.once('open', () => {
   console.log('mongoose connected!')
 })
 
-const restaurantList = restaurant.results
+const app = express()
+const port = 3000
 
 // setting view engine
 app.engine('handlebars', exphdbs({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
-
 // body-parser
-app.use(express.urlencoded({ extended: true }))
-
+app.use(bodyParser.urlencoded({ extended: true }))
 // setting route for static
 app.use(express.static('public'))
 
 // routing
 app.get('/', (req, res) => {
-  res.render('index', { restaurants: restaurantList })
+  Restaurant.find()
+    .lean()
+    .then(restaurants => res.render('index', { restaurants }))
+    .catch(error => console.log(error))
+})
+
+app.get('/restaurants/new', (req, res) => {
+  res.render('new')
+})
+
+app.post('/restaurants', (req, res) => {
+  const newData = req.body
+  Restaurant.create(newData)
+    .then(() => res.redirect('/'))
+    .catch(error => console.log(error))
 })
 
 app.get('/restaurants/:restaurant_id', (req, res) => {
@@ -55,3 +67,5 @@ app.get('/search', (req, res) => {
 app.listen(port, () => {
   console.log(`Express is listening on http://localost:${port}`)
 })
+
+

@@ -18,7 +18,7 @@ db.once('open', () => {
   Restaurant.create(restaurantList)
     .then(() => {
       console.log('loading restaurantList done!')
-      db.close()
+      // db.close()
     })
     .catch(error => console.log(error))
 })
