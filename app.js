@@ -69,9 +69,16 @@ app.get('/restaurants/:id/edit', (req, res) => {
 
 app.post('/restaurants/:id/edit', (req, res) => {
   const { id } = req.params
-  console.log('params', req.params)
   return Restaurant.findByIdAndUpdate(id, req.body)
     .then(() => res.redirect(`/restaurants/${id}`))
+    .catch(error => console.log(error))
+})
+
+//Delete
+app.post('/restaurants/:id/delete', (req, res) => {
+  const { id } = req.params
+  return Restaurant.findByIdAndDelete(id)
+    .then(() => res.redirect('/'))
     .catch(error => console.log(error))
 })
 
