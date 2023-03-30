@@ -85,10 +85,15 @@ app.post('/restaurants/:id/delete', (req, res) => {
 //Search
 app.get('/search', (req, res) => {
   const keyword = req.query.keyword.toLowerCase().trim()
-  const restaurants = Restaurant.filter(restaurant => {
-    return Restaurant.name.toLowerCase().includes(keyword) || Restaurant.category.toLowerCase().includes(keyword)
-  })
-  res.render('index', { restaurants: restaurants, keyword: keyword })
+  return Restaurant.find({})
+    .lean()
+    .then((restaurants) => {
+      const results = restaurants.filter((restaurant) => {
+        return restaurant.name.toLowerCase().includes(keyword) || restaurant.category.toLowerCase().includes(keyword) || restaurant.name_en.toLowerCase().includes(keyword)
+      })
+      res.render('index', { restaurants: results, keyword })
+    })
+    .catch(error => console.log(error))
 })
 
 //listening
