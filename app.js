@@ -4,7 +4,7 @@ const Restaurant = require('./models/restaurant')
 const bodyParser = require('body-parser')
 // mongoose
 const mongoose = require('mongoose')
-const restaurant = require('./models/restaurant')
+// const restaurant = require('./models/restaurant')
 
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config()
@@ -85,8 +85,8 @@ app.post('/restaurants/:id/delete', (req, res) => {
 //Search
 app.get('/search', (req, res) => {
   const keyword = req.query.keyword.toLowerCase().trim()
-  const restaurants = restaurantList.filter(restaurant => {
-    return restaurant.name.toLowerCase().includes(keyword) || restaurant.category.toLowerCase().includes(keyword)
+  const restaurants = Restaurant.filter(restaurant => {
+    return Restaurant.name.toLowerCase().includes(keyword) || Restaurant.category.toLowerCase().includes(keyword)
   })
   res.render('index', { restaurants: restaurants, keyword: keyword })
 })

@@ -1,4 +1,4 @@
-<form action="./restaurants" method="POST">
+<form action="/restaurants" method="POST">
   <div class="m-3">
     <label for="name" class="form-label">新增餐廳名稱</label>
     <input id="name" type="text" class="form-control" placeholder="阿法肯餐廳..." name="name" aria-describedby="name"
@@ -45,7 +45,7 @@
 
   <div class="m-3">
     <label for="phone" class="form-label">電話</label>
-    <input id="phone" type="text" class="form-control" placeholder="0421234567" name="phone" aria-describedby="phone"
+    <input id="phone" type="tel" class="form-control" placeholder="0421234567" name="phone" aria-describedby="phone"
       required>
     <div id="phone" class="form-text" style="color:darkred">此欄位為必填</div>
   </div>
@@ -59,17 +59,16 @@
 
   <div class="m-3">
     <label for="rating" class="form-label">評價</label>
-    <input id="rating" type="number" min="0" max="5" class="form-control" placeholder="4.0" name="rating"
-      aria-describedby="grating" required>
+    <input id="rating" type="number" min="0" max="5" step="0.1" class="form-control" placeholder="4.0" name="rating"
+      aria-describedby="rating" required>
     <div id="rating" class="form-text" style="color:darkred">此欄位為必填</div>
   </div>
 
   <div class="m-3">
     <label for="description" class="form-label">餐廳描述</label>
-    <textarea id="description" type="text" cols="20" class="form-control" placeholder="Describe yourself here..."
-      name="description" aria-describedby="description" required>
-    </textarea>
-    <div id="description" class="form-text" style="color:darkred">此欄位為必填</div>
+    <input id="description" type="text" class="form-control" placeholder="Describe here..." name="description"
+      aria-describedby="description" value="{{ restaurant.description }}" required>
+    <div id="description" class="form-text" style="color:rgb(220, 116, 116)">此欄位為必填</div>
   </div>
 
   <button type="submit" class="btn btn-info m-3">送出</button>
