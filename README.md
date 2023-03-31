@@ -21,30 +21,42 @@
 
 * Node.js @v18.15.0
 * Express @4.16.4
-* Express-handlebars @3.0.0
+* express-handlebars @3.0.0
 * Bootstrap @5.0.2
 * mongoose @5.9.7
 * body-parser@1.20.2
 * dotenv@16.0.3
+* method override@3.0.0
 
 
 ## 安裝與使用
 
-1. 請先確認有安裝 Node.js 、 npm 、 Express 
+1. 請先確認有安裝 Node.js 、 npm
 
 2. 將專案 clone 至本機:
 
-3. 透過終端機進入資料夾，輸入：
+3.透過終端機進入資料夾，輸入：
+```
+npm install
+```
+
+4.設定 MongoDB 連線：
+```
+MONGODB_URI=mongodb+srv://<Your MongoDB Account>:<Your MongoDB Password>@cluster0.xxxx.xxxx.net/<Your MongoDB Table><?retryWrites=true&w=majority
+```
+
+5. 完成連線後輸入：
 ```
 npm run dev
 ```
 
-4. 若看見此行訊息則代表伺服器已啟動
+6. 若看見此行訊息則代表伺服器已啟動
 ```
 Express is listening on http://localost:3000
 ```
 
-5. 打開瀏覽器進入到以下網址
+7. 打開瀏覽器進入到以下網址
 ```
 http://localhost:3000
 ```
+

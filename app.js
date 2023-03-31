@@ -1,7 +1,9 @@
 const express = require('express')
 const exphdbs = require('express-handlebars')
-const Restaurant = require('./models/restaurant')
 const bodyParser = require('body-parser')
+
+
+const Restaurant = require('./models/restaurant')
 // mongoose
 const mongoose = require('mongoose')
 // const restaurant = require('./models/restaurant')
