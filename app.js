@@ -1,9 +1,11 @@
 const express = require('express')
 const exphdbs = require('express-handlebars')
 const bodyParser = require('body-parser')
-
+const methodOverride = require('method-override')
 
 const Restaurant = require('./models/restaurant')
+const routes = require('./routes')
+
 // mongoose
 const mongoose = require('mongoose')
 // const restaurant = require('./models/restaurant')
@@ -23,7 +25,8 @@ db.once('open', () => {
 
 const app = express()
 const port = 3000
-
+// method-override
+app.use(methodOverride('_method'))
 // setting view engine
 app.engine('handlebars', exphdbs({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
@@ -33,70 +36,8 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(express.static('public'))
 
 // routing
-app.get('/', (req, res) => {
-  Restaurant.find()
-    .lean()
-    .then(restaurants => res.render('index', { restaurants }))
-    .catch(error => console.log(error))
-})
-// Create
-app.get('/restaurants/new', (req, res) => {
-  res.render('new')
-})
+app.use(routes)
 
-app.post('/restaurants', (req, res) => {
-  const newData = req.body
-  Restaurant.create(newData)
-    .then(() => res.redirect('/'))
-    .catch(error => console.log(error))
-})
-
-// Detail
-app.get('/restaurants/:id', (req, res) => {
-  const { id } = req.params
-  return Restaurant.findById(id)
-    .lean()
-    .then((restaurant) => res.render('show', { restaurant }))
-    .catch(error => console.log(error))
-})
-
-//Update
-app.get('/restaurants/:id/edit', (req, res) => {
-  const { id } = req.params
-  return Restaurant.findById(id)
-    .lean()
-    .then((restaurant) => res.render('edit', { restaurant }))
-    .catch(error => console.log(error))
-})
-
-app.post('/restaurants/:id/edit', (req, res) => {
-  const { id } = req.params
-  return Restaurant.findByIdAndUpdate(id, req.body)
-    .then(() => res.redirect(`/restaurants/${id}`))
-    .catch(error => console.log(error))
-})
-
-//Delete
-app.post('/restaurants/:id/delete', (req, res) => {
-  const { id } = req.params
-  return Restaurant.findByIdAndDelete(id)
-    .then(() => res.redirect('/'))
-    .catch(error => console.log(error))
-})
-
-//Search
-app.get('/search', (req, res) => {
-  const keyword = req.query.keyword.toLowerCase().trim()
-  return Restaurant.find({})
-    .lean()
-    .then((restaurants) => {
-      const results = restaurants.filter((restaurant) => {
-        return restaurant.name.toLowerCase().includes(keyword) || restaurant.category.toLowerCase().includes(keyword) || restaurant.name_en.toLowerCase().includes(keyword)
-      })
-      res.render('index', { restaurants: results, keyword })
-    })
-    .catch(error => console.log(error))
-})
 
 //listening
 app.listen(port, () => {
