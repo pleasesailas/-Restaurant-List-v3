@@ -51,7 +51,7 @@ app.post('/restaurants', (req, res) => {
 
 // Detail
 app.get('/restaurants/:id', (req, res) => {
-  const id = req.params.id
+  const { id } = req.params
   return Restaurant.findById(id)
     .lean()
     .then((restaurant) => res.render('show', { restaurant }))
@@ -60,7 +60,7 @@ app.get('/restaurants/:id', (req, res) => {
 
 //Update
 app.get('/restaurants/:id/edit', (req, res) => {
-  const id = req.params.id
+  const { id } = req.params
   return Restaurant.findById(id)
     .lean()
     .then((restaurant) => res.render('edit', { restaurant }))
