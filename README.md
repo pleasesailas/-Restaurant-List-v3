@@ -3,8 +3,7 @@
 運用 Node.js + Express 製作的簡易網站。
 
 
-![image](https://github.com/pleasesailas/Restaurant-List-v2/blob/main/readmeImage/index-image.png)
-![image](https://github.com/pleasesailas/Restaurant-List-v2/blob/main/readmeImage/index-image2.png)
+![image](https://github.com/pleasesailas/Restaurant-List-v3/blob/main/public/readmeImage/index.png)
 
 
 ## 特色功能
