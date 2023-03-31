@@ -21,7 +21,6 @@ app.use(express.static('public'))
 // routing
 app.use(routes)
 
-
 //listening
 app.listen(port, () => {
   console.log(`Express is listening on http://localost:${port}`)
