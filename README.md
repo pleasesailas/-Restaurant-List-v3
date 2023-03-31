@@ -4,7 +4,7 @@
 
 
 ![image](https://github.com/pleasesailas/Restaurant-List-v3/blob/main/public/readmeImage/index.png)
-
+https://github.com/pleasesailas/-Restaurant-List-v3/blob/main/public/readmeImage/index.png
 
 ## 特色功能
 
@@ -34,12 +34,12 @@
 
 2. 將專案 clone 至本機:
 
-3.透過終端機進入資料夾，輸入：
+3. 透過終端機進入資料夾，輸入：
 ```
 npm install
 ```
 
-4.設定 MongoDB 連線：
+4. 設定 MongoDB 連線：
 ```
 MONGODB_URI=mongodb+srv://<Your MongoDB Account>:<Your MongoDB Password>@cluster0.xxxx.xxxx.net/<Your MongoDB Table><?retryWrites=true&w=majority
 ```
