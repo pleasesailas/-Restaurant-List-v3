@@ -2,6 +2,7 @@ const express = require('express')
 const exphdbs = require('express-handlebars')
 const bodyParser = require('body-parser')
 const methodOverride = require('method-override')
+const session = require('express-session')
 
 const routes = require('./routes')
 const app = express()
@@ -18,6 +19,12 @@ app.set('view engine', 'handlebars')
 app.use(bodyParser.urlencoded({ extended: true }))
 // setting route for static
 app.use(express.static('public'))
+// session
+app.use(session({
+  secret:'This is mySecret',
+  resave: false,
+  saveUninitialized: true
+}))
 // routing
 app.use(routes)
 
