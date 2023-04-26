@@ -28,6 +28,11 @@ app.use(session({
 }))
 // passport
 UsePassport(app)
+app.use((req, res, next) => {
+  res.locals.isAuthenticated = req.isAuthenticated()
+  res.locals.user = req.user
+  next()
+})
 // routing
 app.use(routes)
 
