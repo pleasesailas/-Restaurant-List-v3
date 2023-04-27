@@ -8,10 +8,10 @@ const flash = require('connect-flash')
 const routes = require('./routes')
 const UsePassport = require('./config/passport')
 const app = express()
-const port = 3000
 
 // mongoose
 require('./config/mongoose')
+const port = process.env.PORT
 // method-override
 app.use(methodOverride('_method'))
 // setting view engine
@@ -25,7 +25,7 @@ app.use(express.static('public'))
 app.use(flash())
 // session
 app.use(session({
-  secret:'This is mySecret',
+  secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: true
 }))
